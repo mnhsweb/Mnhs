@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MAA National High School — Official Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#2a9d8f;
+      --accent-dark:#21867a;
+      --muted:#6b7280;
+      --bg:#f9fafb;
+      --card-bg:#fff;
+      --text:#111;
+    }
+    body.dark{
+      --bg:#111827;
+      --card-bg:#1f2937;
+      --text:#f3f4f6;
+      --muted:#9ca3af;
+      --accent:#34d399;
+      --accent-dark:#059669;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      line-height:1.6;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      scroll-behavior:smooth;
+      transition:background .3s,color .3s;
+    }
+
+    /* 🔥 Splash Screen */
+    #splash {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #2a9d8f, #21867a);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: #fff;
+      text-align: center;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 2.5s;
+    }
+    #splash.hidden { display: none; }
+    #splash img {
+      width: 90px; height: 90px;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      animation: bounceIn 1s ease;
+    }
+    #splash h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      animation: fadeIn 1.2s ease;
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* ✅ HEADER WITH PHOTO BACKGROUND */
+    header {
+      background: url("Picsart_25-10-03_13-18-56-983.jpg") center/cover no-repeat;
+      color: #fff;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.45);
+      z-index: 1;
+    }
+    header .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap:.5rem;
+    }
+    .brand img{width:80px;height:80px;object-fit:contain;border-radius:50%;background:#fff;padding:4px}
+    h1{font-size:2rem;margin:0;line-height:1.2}
+    .tagline{color:#e0f2f1;font-size:1rem}
+    nav {
+      margin-top:1rem;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+    nav a{color:#fff;text-decoration:none;font-weight:600;position:relative;font-size:1rem}
+    nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#fff;transition:.3s}
+    nav a:hover::after{width:100%}
+    .toggle-btn{background:transparent;border:2px solid #fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:background .3s;font-size:1rem;margin:1rem auto 0}
+    .toggle-btn:hover{background:rgba(255,255,255,0.2)}
+
+    /* SECTIONS */
+    .container{max-width:1200px;margin:0 auto;padding:0 .8rem}
+    .hero, section{margin-top:2rem}
+    .card{background:var(--card-bg);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.08);padding:1.2rem;transition:transform .3s,box-shadow .3s,background .3s,color .3s;opacity:0;transform:translateY(20px)}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+    h2,h3,h4{margin-bottom:.4rem}
+    .muted{color:var(--muted);font-size:.9rem}
+    .cols{display:grid;gap:1.2rem}
+    @media(min-width:900px){.cols{grid-template-columns:2fr 1fr}}
+    footer{margin-top:2rem;padding:.8rem 0;text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid #e5e7eb;animation:fadeIn 1s ease;transition:color .3s}
+    .btn{display:inline-block;padding:.5rem 1rem;border-radius:8px;background:var(--accent);color:white;text-decoration:none;font-weight:600;transition:background .2s,transform .2s;font-size:.9rem}
+    .btn:hover{background:var(--accent-dark);transform:scale(1.05)}
+    ul.clean{list-style:none;padding:0;margin:0}
+    .media{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin-top:.8rem}
+    .media img{width:100%;height:120px;object-fit:cover;border-radius:8px;transition:transform .3s}
+    .media img:hover{transform:scale(1.05)}
+    .embed-video{width:100%;height:200px;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+    iframe{border:0}
+    .section-title{text-align:center;margin-bottom:.8rem;font-size:1.3rem;font-weight:700;color:var(--accent);position:relative;}
+    .section-title::after{content:'';width:50px;height:3px;background:var(--accent);display:block;margin:.4rem auto 0;border-radius:2px}
+  </style>
+</head>
+<body>
+  <!-- 🔥 Splash Intro -->
+  <div id="splash">
+    <img src="https://graph.facebook.com/OfficialMNHSDvo/picture?type=large" alt="MAA Logo">
+    <h1>Welcome to MAA NHS</h1>
+  </div>
+
+  <!-- 🔽 Main Site -->
+  <header>
+    <div class="container">
+      <div class="brand">
+        <img src="https://graph.facebook.com/OfficialMNHSDvo/picture?type=large" alt="MAA Logo">
+        <h1>MAA National High School</h1>
+        <div class="tagline">Brgy. Ma-a, Davao City • Since 1974</div>
+      </div>
+      <button class="toggle-btn" id="darkToggle">🌙</button>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ✅ ABOUT + INTRO + HYMN -->
+    <section id="about" class="hero">
+      <div class="card">
+        <h2>Welcome to MAA National High School</h2>
+        <p class="muted">
+          MAA NHS is a formal Learning Institution. It is a training ground for our future leaders where learners passionately love their country whose competencies and values enable them to realize their full potential and contribute meaningfully to building the nation.
+        </p>
+        <p class="muted">
+          Learners are expected to focus their time to acquire cognitive, affective and psychomotor skills fitting to the 21st century.
+        </p>
+        <ul class="clean muted">
+          <li>🧠 Cognitive — thinking and problem-solving skills</li>
+          <li>❤️ Affective — right attitude in facing challenges</li>
+          <li>✋ Psychomotor — mastery in processes and skills</li>
+        </ul>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h4>School Hymn / National Anthem</h4>
+          <div class="embed-video">
+            <iframe width="100%" height="100%"
+              src="https://www.youtube.com/embed/lj0drvb_Kbg"
+              title="MAA NHS Hymn"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <p class="muted" style="margin-top:.4rem">Listen to our alma mater hymn.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="programs">
+      <h3 class="section-title">Programs & Services</h3>
+      <div class="card">
+        <p>We offer a complete K-12 program with Junior and Senior High levels. Students can join special interest clubs, academic organizations, and sports teams.</p>
+        <ul>
+          <li>📘 Basic Education Curriculum (K-12)</li>
+          <li>🎓 Senior High Tracks: Academic & TVL</li>
+          <li>⚽ Sports & Student Clubs</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h3 class="section-title">Gallery</h3>
+      <div class="card">
+        <div class="media">
+          <img src="Picsart_25-10-03_13-18-56-983.jpg" alt="Campus View">
+          <img src="https://via.placeholder.com/400x250?text=Classroom" alt="Classroom">
+          <img src="https://via.placeholder.com/400x250?text=Event" alt="Event">
+          <img src="https://via.placeholder.com/400x250?text=Students" alt="Students">
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <h3 class="section-title">News & Updates</h3>
+      <div class="card">
+        <div id="fb-root"></div>
+        <div class="fb-page"
+             data-href="https://www.facebook.com/OfficialMNHSDvo/"
+             data-tabs="timeline"
+             data-width="100%"
+             data-height="600"
+             data-small-header="false"
+             data-adapt-container-width="true"
+             data-hide-cover="false"
+             data-show-facepile="true">
+          <blockquote cite="https://www.facebook.com/OfficialMNHSDvo/" class="fb-xfbml-parse-ignore">
+            <a href="https://www.facebook.com/OfficialMNHSDvo/">MAA National High School Official</a>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3 class="section-title">Contact & Location</h3>
+      <div class="card">
+        <p><strong>Phone:</strong> (02) 225-2922 / 224-0275</p>
+        <p><strong>Facebook:</strong> <a href="https://www.facebook.com/OfficialMNHSDvo/" target="_blank">MAA NHS Official</a></p>
+        <div style="height:240px;border-radius:12px;overflow:hidden;margin-top:.8rem">
+          <iframe width="100%" height="100%" src="https://www.google.com/maps?q=Maa+National+High+School+Davao+City&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> MAA National High School — All rights reserved.
+    </footer>
+  </main>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ✅ Splash screen auto-hide
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("splash").classList.add("hidden");
+    }, 3000);
+  });
+
+  // ✅ Animate cards on scroll
+  const cards = document.querySelectorAll('.card');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {threshold:0.1});
+  cards.forEach(card=>observer.observe(card));
+
+  // ✅ Dark mode toggle
+  const toggleBtn = document.getElementById('darkToggle');
+  toggleBtn.addEventListener('click',()=>{
+    document.body.classList.toggle('dark');
+    toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  });
+</script>
+</body>
+</html>
